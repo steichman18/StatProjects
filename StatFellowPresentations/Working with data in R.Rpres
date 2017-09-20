@@ -1,0 +1,164 @@
+Working with data in R
+========================================================
+author: Caleb Ki and Sarah Teichman   
+date: 
+autosize: true
+
+Introduction to R
+========================================================
+
+R is a programming language and software environment for statistical computing and data visualization
+
+- uses a simple programming language
+- can be augmented by user-created packages 
+
+RStudio in the cloud
+========================================================
+
+- For amherst users, go to http://r.amherst.edu and log in with Amherst username and password
+- Other colleges probably have their own R server
+
+Other ways of accessing R
+========================================================
+
+- R can be installed from http://cran.r-project.org 
+- RStudio can be downloaded from http://www.rstudio.com
+- This downloads base R, which contains basic data management, analysis, and graphical tools
+- Packages can be added, and most can be downloaded from http://cran.r-project.org
+
+Useful Packages 
+=======================================================
+
+- mosaic package has many datasets and useful statistical functions
+- dplyr package has various data management tools
+- ggplot2 has more complicated data visualization tools
+
+Installing and Loading Packages
+=======================================================
+
+- to install packages, use install.packages(" ") command
+```{r}
+#install.packages("dplyr")
+```
+- to load package for current R session, use library(" ") or require(" ") commands
+```{r}
+library("mosaic"); require("ggplot2")
+```
+
+RStudio Structure
+=======================================================
+
+- the console, in the bottom left, is where all the code is run
+- the environment, in the top right, stores and displays all of the data that has been loaded 
+- the history tab shows all the commands that have been run in the console
+
+R Studio Structure Continued
+=======================================================
+
+- the bottom right square contains tabs for files, plots, packages, help, and viewer
+- the files tab contains all the files that have been loaded into RStudio
+- the plots tab is where any visualizations will appear
+- the packages tab shows which packages have already been downloaded 
+- the help tab contains documentation for various packages and functions
+- the top left is where R Markdown files are written
+
+Creating a New Project
+=======================================================
+
+- creating a new project allows for separate workspaces for different jobs
+- each project has its own environment, workspace, history, files, etc.
+- to create a new project, go to file --> new project, and then click on new directory and empty project
+
+R Markdown Files
+=======================================================
+
+- R code can be written into the command line directly, or saved in an RMarkdown file (with the extension Rmd)
+- to create a RMarkdown file, go to file -> new file -> RMarkdown 
+- this creates a document with both text and executed code that can be saved
+- all code should be contained within a code chunk
+- this file can be compiled into a html, pdf, or word document, with the Knit button at the top of the file
+
+Getting data into R
+=======================================================
+
+- to load data that is hosted online, use the command read.csv with the url where the data is location
+```{r}
+flow <- read.csv("http://www3.amherst.edu/~nhorton/rice/chapter10/flow-occ.csv")
+```
+- to upload a file into RStudio in the cloud, click the upload button in the files tab
+- to load data that is hosted locally (in the files tab), use read.csv with the file name
+- ex: flow <- read.csv("flow-occ.csv")
+- data files must be stored in the same folder as the file in which the data is loaded 
+
+R Programming
+=======================================================
+
+- commands are put in separate lines or separated by a ;
+- R is case-sensitive
+- comments can be added to code by using the # character
+- typing ?function into the console will bring up the helpful for that function
+- typing ??keyword into the console will search the documentation for that keyword
+
+R Programming Objects 
+=======================================================
+
+- the data in R is saved in the form of objects
+- data can be assigned to and stored in objects using <- or = operator
+- the ls() command will produce a list of all objects in the current session
+
+Viewing data
+=======================================================
+
+- entire datasets can be viewed with the View(dataset_name) or by clicking on the object name in the environment
+- each row of a dataset is one observation, and each column is a specific variable 
+- the first or last several observations can be viewed with the head(dataset_name) and tail(dataset_name) commands
+```{r}
+head(flow)
+```
+
+Viewing data continued
+=======================================================
+- the names(dataset_name) command gives a list of the variable names
+- specific variables can be accessedd with the notation object$variable
+
+Descriptive Stats
+=======================================================
+- the summary(object_name) function returns a summary of the variables in an object
+- the favstats(object$variable) function returns the summary of a single variable
+- there are individual commands that can be used, such as mean(), var(), median(), min()
+- more of these commands can be found in the documentation for the mosaic package
+
+```{r}
+favstats(flow$Lane.1.Occ)
+```
+
+Useful plots - Histogram
+=======================================================
+
+- to create a histogram of a variable, use the command histogram(variable, data=dataset)
+```{r}
+histogram(~Lane.1.Occ, data=flow, width=0.04)
+```
+
+Useful plots - Scatterplot
+=======================================================
+- to create a scatterplot of two variables, use the command xyplot(y_variable~x_variable, data=dataset)
+```{r}
+xyplot(Lane.1.Flow~Lane.1.Occ, data=flow, main="Flow vs Occupancy", xlim=c(0.0,0.5))
+```
+
+Categorical Data
+=======================================================
+
+- a categorical variable can be summarized in a frequency table with the command tally(variable)
+```{r}
+data(iris)
+tally(~Species, data=iris, format="prop")
+```
+
+Sources
+=======================================================
+
+-http://www.ats.ucla.edu/stat/r/seminars/intro.htm
+
+-https://github.com/andrewpbray/working-with-data-in-r/blob/master/working-with-data-in-r.Rmd

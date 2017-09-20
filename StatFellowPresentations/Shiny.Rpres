@@ -1,0 +1,124 @@
+Shiny Workshop
+========================================================
+author: Jonathan Che and Sarah Teichman
+date: March 29, 2016
+autosize: true
+
+What is Shiny?
+========================================================
+
+http://shiny.rstudio.com/gallery/google-charts.html
+
+- Shiny is an interactive web-based data visualization tool
+
+- Is written with R code
+
+Getting Started
+========================================================
+
+- Log into r.amherst.edu if you are an Amherst student
+- 5 College students open RStudio in the way you usually do
+- File -> New File -> Shiny Web App
+- Name your app and click create
+
+App.R Format
+========================================================
+There are two parts to the app.R file for a Shiny app
+
+1) ui: this part controls the physical appearance of the app by building a webpage
+
+2) server: this part controls the actual function of the app
+
+User Interface (ui)
+========================================================
+The ui is made up of input and output objects that are organized by a layout template
+- In the example, there is a sidebar layout, a slider input, and a plot output
+
+Layout Template
+========================================================
+- http://shiny.rstudio.com/articles/layout-guide.html
+- There are many Shiny layouts to choose from
+- The example uses the sidebar layout, which has a sidebar panel and a name panel 
+
+Input Objects
+========================================================
+|function|	widget|
+|---|---|
+|actionButton|	Action Button|
+|checkboxGroupInput|	A group of check boxes|
+|checkboxInput	|A single check box|
+|dateInput	|A calendar to aid date selection|
+|dateRangeInput|	A pair of calendars for selecting a date range|
+|fileInput	|A file upload control wizard|
+|helpText	|Help text that can be added to an input form|
+|numericInput|	A field to enter numbers|
+|radioButtons	|A set of radio buttons|
+|selectInput|	A box with choices to select from|
+|sliderInput|	A slider bar|
+|submitButton|	A submit button|
+|textInput	|A field to enter text|
+
+
+Input Objects
+========================================================
+- Input arguments require an input id, label, and specific arguments
+- Each input and output id should be unique
+- Ex:
+```sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 30)```
+
+Output Objects                     
+========================================================
+|Output Function|Creates|
+|---------|------|
+|htmlOutput	|raw HTML|
+|imageOutput|	image|
+|plotOutput	|plot|
+|tableOutput|	table|
+|textOutput	|text|
+|uiOutput	|raw HTML|
+|verbatimTextOutput	|text|
+- The example uses a plotOutput
+- The only argument to an output object is the id
+
+Server
+========================================================
+The server part of the file is where you write the code that actually makes your app work
+- In the example, there is code that controls the creation of a histogram
+
+Server
+========================================================
+```output$id <- render*```
+
+|render function|	creates|
+|-----|-----|
+|renderImage	|images (saved as a link to a source file)|
+|renderPlot	|plots|
+|renderPrint|	any printed output|
+|renderTable|	data frame, matrix, other table like structures|
+|renderText	|character strings|
+|renderUI	|a Shiny tag object or HTML|
+- Use the render function that corresponds with your output object type
+
+Render*
+========================================================
+- render*({ insert R code within the braces })
+- input objects can be referenced by ```input$id```
+
+Publishing your Shiny app
+========================================================
+- To run your app as a webpage, you need a cloud-based server
+- http://shinyapps.io is a free server that will host apps
+- Make an Shiny account by going to http://shinyapps.io and follow instructions by copying commands into RStudio console
+
+Sources
+========================================================
+- http://shiny.rstudio.com/tutorial/ 
+- this tutorial has more in-depth explanations of Shiny and several examples 
+
+Your turn!
+========================================================
+- http://jche.shinyapps.io/Iris
